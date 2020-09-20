@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
 
-    Button btnTextReset;
+    Button nowLocBtn;
 
 
     View view;
@@ -70,8 +70,8 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
 
 
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter(getActivity()));
-        btnTextReset = view.findViewById(R.id.now_location);
-        btnTextReset.setOnClickListener(new View.OnClickListener() {
+        nowLocBtn = view.findViewById(R.id.now_location);
+        nowLocBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);

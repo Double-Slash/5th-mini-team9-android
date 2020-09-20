@@ -8,6 +8,9 @@ import android.view.MotionEvent;
 import androidx.core.view.MotionEventCompat;
 import androidx.viewpager.widget.ViewPager;
 
+    /*
+    * 뷰페이저의 스와이프 기능을 해제하기위해 뷰페이저 커스텀한 클래스입니다. 신경쓰지 않으셔도 됩니다.
+    * */
 public class SwipeViewPager extends ViewPager {
     private boolean enabled;
 
