@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         loadTabName();
         setTabLayout();
         setViewPager();
-        getHashKey();
 //        setupTabIcons();
     }
 
@@ -100,25 +99,4 @@ public class MainActivity extends AppCompatActivity {
 //        tabContent.getTabAt(1).setCustomView(view2);
 //        tabContent.getTabAt(2).setCustomView(view3);
 //    }
-
-    private void getHashKey(){
-        PackageInfo packageInfo = null;
-        try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (packageInfo == null)
-            Log.e("KeyHash", "KeyHash:null");
-
-        for (Signature signature : packageInfo.signatures) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            } catch (NoSuchAlgorithmException e) {
-                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
-            }
-        }
-    }
 }
