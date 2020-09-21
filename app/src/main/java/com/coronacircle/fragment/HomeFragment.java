@@ -1,4 +1,4 @@
-package com.coronacircle;
+package com.coronacircle.fragment;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -19,6 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.coronacircle.adapter.CustomCalloutBalloonAdapter;
+import com.coronacircle.R;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;

@@ -1,7 +1,8 @@
-package com.coronacircle;
+package com.coronacircle.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.coronacircle.fragment.HomeFragment;
+import com.coronacircle.fragment.NotifyFragment;
+import com.coronacircle.fragment.SettingFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

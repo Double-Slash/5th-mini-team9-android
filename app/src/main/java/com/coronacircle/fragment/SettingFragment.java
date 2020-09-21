@@ -1,4 +1,4 @@
-package com.coronacircle;
+package com.coronacircle.fragment;
 
 import android.os.Bundle;
 
@@ -8,26 +8,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.coronacircle.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NotifyFragment#newInstance} factory method to
+ * Use the {@link SettingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotifyFragment extends Fragment {
+public class SettingFragment extends Fragment {
 
     View view;
 
-    public NotifyFragment() { }
+    public SettingFragment() {
+        // Required empty public constructor
+    }
 
-    public static NotifyFragment newInstance() {
-        NotifyFragment fragment = new NotifyFragment();
+    public static SettingFragment newInstance() {
+        SettingFragment fragment = new SettingFragment();
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_notify, container, false);
+        view = inflater.inflate(R.layout.fragment_setting, container, false);
         return view;
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
 
     <com.google.android.material.tabs.TabLayout
@@ -18,13 +18,13 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <com.coronacircle.SwipeViewPager
+    <com.coronacircle.adapter.SwipeViewPager
         android:id="@+id/viewPager"
         android:layout_above="@id/tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
         >
-    </com.coronacircle.SwipeViewPager>
+    </com.coronacircle.adapter.SwipeViewPager>
 
 </RelativeLayout>

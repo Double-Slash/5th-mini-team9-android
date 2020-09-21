@@ -1,4 +1,4 @@
-package com.coronacircle;
+package com.coronacircle.adapter;
 
 
 import android.content.Context;

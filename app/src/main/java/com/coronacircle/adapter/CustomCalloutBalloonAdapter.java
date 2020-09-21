@@ -1,17 +1,18 @@
-package com.coronacircle;
+package com.coronacircle.adapter;
 
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.coronacircle.R;
 
 import net.daum.mf.map.api.CalloutBalloonAdapter;
 import net.daum.mf.map.api.MapPOIItem;
 
 import java.util.List;
 
-class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
+public class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
     private final View mCalloutBalloon;
     private List maps;
     private Context context;
