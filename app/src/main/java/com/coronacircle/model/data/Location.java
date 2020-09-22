@@ -3,16 +3,19 @@ package com.coronacircle.model.data;
 import java.math.BigDecimal;
 
 public class Location {
-    int id;
-    String time;
-    String city;
-    String district;        //구(노원구)
-    String road;            //로(동일로)
-    String detailed;        //
-    BigDecimal latitude;    //위도
-    BigDecimal longitude;   //경도
+    private int id;
+    private String name;            //상호명
+    private String date_time;       //?
+    private String city;            //시(서울시)
+    private String district;        //구(노원구)
+    private String road;            //로(동일로)
+    private String detailed;        //자세한주소
+    private BigDecimal latitude;    //위도
+    private BigDecimal longitude;   //경도
 
+    public String getName() { return name; }
 
+    public void setName(String name) { this.name = name; }
 
     public int getId() {
         return id;
@@ -22,15 +25,11 @@ public class Location {
         this.id = id;
     }
 
-    public String getTime() {
-        return time;
+    public String getDate_time() {
+        return date_time;
     }
 
-    public void setTime(String time) {
-
-        this.time = time;
-
-    }
+    public void setDate_time(String time) { this.date_time = date_time; }
 
     public String getCity() {
         return city;
@@ -64,9 +63,7 @@ public class Location {
         this.detailed = detailed;
     }
 
-    public BigDecimal getLatitude() {
-        return latitude;
-    }
+    public BigDecimal getLatitude() { return latitude; }
 
     public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
