@@ -12,6 +12,9 @@ import net.daum.mf.map.api.MapPOIItem;
 
 import java.util.List;
 
+    /*
+     * 맵 마커 위 말풍선 커스텀
+     * */
 public class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
     private final View mCalloutBalloon;
     private List maps;

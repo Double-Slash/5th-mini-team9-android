@@ -5,13 +5,14 @@ import java.math.BigDecimal;
 public class Location {
     private int id;
     private String name;            //상호명
-    private String date_time;       //?
+    private String date;            //?
+    private String arrivedTime;     //방문시간
+    private String exitTime;
     private String city;            //시(서울시)
     private String district;        //구(노원구)
-    private String road;            //로(동일로)
-    private String detailed;        //자세한주소
-    private BigDecimal latitude;    //위도
-    private BigDecimal longitude;   //경도
+    private String detailed;        //로(동일로)~자세한주소
+    private String latitude;    //위도
+    private String longitude;   //경도
 
     public String getName() { return name; }
 
@@ -25,11 +26,29 @@ public class Location {
         this.id = id;
     }
 
-    public String getDate_time() {
-        return date_time;
+    public String getDate() {
+        return date;
     }
 
-    public void setDate_time(String time) { this.date_time = date_time; }
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getArrivedTime() {
+        return arrivedTime;
+    }
+
+    public void setArrivedTime(String arrivedTime) {
+        this.arrivedTime = arrivedTime;
+    }
+
+    public String getExitTime() {
+        return exitTime;
+    }
+
+    public void setExitTime(String exitTime) {
+        this.exitTime = exitTime;
+    }
 
     public String getCity() {
         return city;
@@ -47,14 +66,6 @@ public class Location {
         this.district = district;
     }
 
-    public String getRoad() {
-        return road;
-    }
-
-    public void setRoad(String road) {
-        this.road = road;
-    }
-
     public String getDetailed() {
         return detailed;
     }
@@ -63,17 +74,19 @@ public class Location {
         this.detailed = detailed;
     }
 
-    public BigDecimal getLatitude() { return latitude; }
+    public String getLatitude() {
+        return latitude;
+    }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public BigDecimal getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 }

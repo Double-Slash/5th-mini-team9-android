@@ -1,6 +1,7 @@
 package com.coronacircle.fragment;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,21 +12,32 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.coronacircle.activity.MainActivity;
 import com.coronacircle.adapter.CustomCalloutBalloonAdapter;
 import com.coronacircle.R;
+import com.coronacircle.adapter.YearMonthDayPickerDialog;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
+
+import java.util.Calendar;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -33,12 +45,22 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
+
+    //권한 받아야하는 퍼미션 종류
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     Button nowLocBtn;
-
+    ImageButton filterBtn;
 
     View view;
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
+            Log.d("YearMonthPickerTest", "year = " + year + ", month = " + monthOfYear + ", day = " + dayOfMonth);
+        }
+    };
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -53,30 +75,24 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        MapView mapView = new MapView(view.getContext());
+        //if (위치 정보 비활성화시) 설정화면으로 안내
+        //else (위치 정보 활성화시) 퍼미션 확인
+        if (!checkLocationServicesStatus()) showDialogForLocationServiceSetting();
+        else checkRunTimePermission();
 
         ViewGroup mapViewContainer = (ViewGroup)view.findViewById(R.id.map_view);
+        MapView mapView = new MapView(view.getContext());
         mapViewContainer.addView(mapView);
         mapView.setMapViewEventListener(this);
-
         mapView.setPOIItemEventListener(this);
-
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-
-        if (!checkLocationServicesStatus()) {
-            //위치 정보 비활성화시 설정화면으로 안내
-            showDialogForLocationServiceSetting();
-        }else {
-            //위치 정보 활성화시 퍼미션 확인
-            checkRunTimePermission();
-        }
-
-
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter(getActivity()));
+
         nowLocBtn = view.findViewById(R.id.now_location);
         nowLocBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //현재 사용자 위치로 이동
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
 //                mapView.setZoomLevel(1, true);
             }
@@ -94,8 +110,6 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
 
         mapView.addPOIItem(marker);
 
-
-
 //        // 위치 정보 비활성상태로 접속시 중심위치값
 //        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
 //
@@ -104,6 +118,44 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
 //
 //        mapView.zoomIn(true);
 //        mapView.zoomOut(true);
+
+
+        filterBtn = view.findViewById(R.id.filter);
+        filterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                YearMonthDayPickerDialog pd = new YearMonthDayPickerDialog();
+                pd.setListener(d);
+                pd.show(getChildFragmentManager(), "YearMonthPickerTest");
+
+//                final LinearLayout linear = (LinearLayout) View.inflate(view.getContext(), R.layout.dialog_datefilter, null);
+//                DatePicker datePicker = linear.findViewById(R.id.dataPicker);
+//                day = 10;
+//                datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+//                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                        date = year + "/" + monthOfYear + "/" + dayOfMonth;
+//                    }
+//                });
+//                new AlertDialog.Builder(view.getContext())
+//                        .setView(linear)
+//                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int whichButton) {
+//                                System.out.println(date);
+//                                Toast.makeText(getActivity(), date, Toast.LENGTH_SHORT).show();
+//                                dialog.dismiss();
+//                            }
+//                        })
+//                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int whichButton) {
+//                                System.out.println("취소는잘된다");
+//                                dialog.dismiss();
+//                            }
+//                        })
+//                        .show();
+
+            }
+        });
+
         return view;
     }
 

@@ -33,7 +33,6 @@ public class UserLocationDbHelper extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
     }
 
-    //원래 latitude, longitude는 BigDecimal타입인데 sqilite에는 들어가지 않아서 text로 넣어야합니다.
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE "+ TABLE_NAME + "("

@@ -7,4 +7,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NumberPicker" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="AnimationPopupStyle">
+        <item name="android:windowEnterAnimation">@anim/open</item>
+        <item name="android:windowExitAnimation">@anim/close</item>
+    </style>
+
 </resources>

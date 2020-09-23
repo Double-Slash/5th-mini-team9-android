@@ -11,7 +11,6 @@ public class UserLocation {
     private BigDecimal latitude;    //위도
     private BigDecimal longitude;   //경도
 
-
     public int getId() {
         return id;
     }
