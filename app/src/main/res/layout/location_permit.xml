@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_main"
+    tools:context=".activity.MainActivity">
+
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/title_img"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_marginTop="30dp"/>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/interface0"
+        android:layout_below="@id/title_img"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notice"
+            android:text="                      코로나써클을 이용하기 위해서는\n
+                   아래의 권한설정 동의가 필요합니다."
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/view"
+        android:layout_height="1dp"
+        android:layout_below="@id/interface0"
+        android:layout_marginTop="30dp"
+        android:background="#000000"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/permit_title"
+                android:text="필수 권한 허용"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="20dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/permit_title">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/interface1">
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:id="@+id/image"
+                    android:layout_marginLeft="35dp"
+                    android:src="@drawable/ic_launcher_background"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/image"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/location"
+                    android:text="위치" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/image"
+                    android:layout_below="@id/location"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/explain"
+                    android:text="확진자 동선 확인과 내 동선 기록"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/interface2"
+                    android:layout_below="@id/interface1">
+                    <ImageView
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:id="@+id/image2"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_launcher_background"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/image2"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/alram"
+                        android:text="알림" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/image2"
+                        android:layout_below="@id/alram"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/explain2"
+                        android:text="확진자와 동선이 가깝거나 겹치는 경우 알림"/>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="확인"/>
+    </RelativeLayout>
+</RelativeLayout>
