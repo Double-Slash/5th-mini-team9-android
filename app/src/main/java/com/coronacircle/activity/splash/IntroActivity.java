@@ -1,4 +1,4 @@
-package com.coronacircle.activity;
+package com.coronacircle.activity.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,9 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.coronacircle.R;
+import com.coronacircle.activity.PermissionCheckActivity;
 
-public class Intro extends AppCompatActivity {
+public class IntroActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +19,10 @@ public class Intro extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                Intent intent = new Intent(Intro.this,PermissionCheck.class);
+                Intent intent = new Intent(IntroActivity.this, PermissionCheckActivity.class);
                 startActivity(intent);
                 finish();
             }
-        },3000);
+        },2000);
     }
 }
