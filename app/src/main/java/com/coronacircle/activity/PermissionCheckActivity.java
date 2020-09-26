@@ -3,6 +3,7 @@ package com.coronacircle.activity;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -52,9 +53,15 @@ public class PermissionCheckActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        if(!permission.permissionResult(requestCode, permissions,grantResults)){
-            permission.requestPermission();
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        for(int i=0; i<grantResults.length; i++){
+            if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this,"승인이 허가되었습니다.",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this,"앱을 이용하기 위해선 승인이 필요합니다.",Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
