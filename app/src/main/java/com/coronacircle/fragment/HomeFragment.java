@@ -2,9 +2,11 @@ package com.coronacircle.fragment;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -33,8 +35,11 @@ import com.coronacircle.adapter.CustomCalloutBalloonAdapter;
 import com.coronacircle.R;
 import com.coronacircle.adapter.YearMonthDayPickerDialog;
 
+import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapPointBounds;
+import net.daum.mf.map.api.MapPolyline;
 import net.daum.mf.map.api.MapView;
 
 import java.util.Calendar;
@@ -86,18 +91,32 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
         mapView.setMapViewEventListener(this);
         mapView.setPOIItemEventListener(this);
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+
+        //말풍선 커스텀 어댑터
         mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter(getActivity()));
 
-        nowLocBtn = view.findViewById(R.id.now_location);
-        nowLocBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //현재 사용자 위치로 이동
-                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-//                mapView.setZoomLevel(1, true);
-            }
-        });
 
+        //선그리기
+//        MapPolyline polyline = new MapPolyline();
+//        polyline.setTag(1000);
+//        polyline.setLineColor(Color.argb(128, 255, 51, 0)); // Polyline 컬러 지정.
+//
+//        // Polyline 좌표 지정.
+//        polyline.addPoint(MapPoint.mapPointWithGeoCoord(37.537229, 127.005515));
+//        polyline.addPoint(MapPoint.mapPointWithGeoCoord(37.545024,127.03923));
+//        polyline.addPoint(MapPoint.mapPointWithGeoCoord(37.527896,127.036245));
+//        polyline.addPoint(MapPoint.mapPointWithGeoCoord(37.541889,127.095388));
+//
+//        // Polyline 지도에 올리기.
+//        mapView.addPolyline(polyline);
+//
+//        // 지도뷰의 중심좌표와 줌레벨을 Polyline이 모두 나오도록 조정.
+//        MapPointBounds mapPointBounds = new MapPointBounds(polyline.getMapPoints());
+//        int padding = 100; // px
+//        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, padding));
+
+
+        //마커
         MapPOIItem marker = new MapPOIItem();
 
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633);
@@ -119,6 +138,16 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
 //        mapView.zoomIn(true);
 //        mapView.zoomOut(true);
 
+
+        nowLocBtn = view.findViewById(R.id.now_location);
+        nowLocBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //현재 사용자 위치로 이동
+                mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+//                mapView.setZoomLevel(1, true);
+            }
+        });
 
         filterBtn = view.findViewById(R.id.filter);
         filterBtn.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +192,7 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
     public void onCurrentLocationUpdate(MapView mapView, MapPoint currentLocation, float accuracyInMeters) {
         MapPoint.GeoCoordinate mapPointGeo = currentLocation.getMapPointGeoCoord();
         Log.i("HomeFragment", String.format("MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
+
     }
     @Override
     public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
@@ -354,4 +384,5 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
     public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
 
     }
+
 }
