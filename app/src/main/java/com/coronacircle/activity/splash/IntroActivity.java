@@ -19,6 +19,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         Handler handler = new Handler();
+        
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
