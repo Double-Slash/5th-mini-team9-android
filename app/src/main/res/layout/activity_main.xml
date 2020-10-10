@@ -11,11 +11,13 @@
         android:id="@+id/tab"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:paddingTop="5dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabIndicatorHeight="0dp"
         android:background="#FAFAFA"
         >
-
     </com.google.android.material.tabs.TabLayout>
 
     <com.coronacircle.adapter.SwipeViewPager

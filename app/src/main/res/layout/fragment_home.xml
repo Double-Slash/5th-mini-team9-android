@@ -15,22 +15,31 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
 
-        <Button
+        <ImageButton
             android:id="@+id/now_location"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="20dp"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/roundbutton"
+            android:layout_above="@id/filter"
+            android:src="@drawable/gps"
+            android:padding="25dp"
+            android:scaleType="fitCenter"
+            />
 
         <ImageButton
             android:id="@+id/filter"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="20dp"
+            android:background="@drawable/roundbutton"
+            android:src="@drawable/filter"
+            android:padding="28dp"
+            android:scaleType="fitCenter"
             />
 
     </RelativeLayout>

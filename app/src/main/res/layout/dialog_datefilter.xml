@@ -75,11 +75,13 @@
         android:layout_margin="10dp"
         android:background="#D3D3D3"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="10dp"
         android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -90,12 +92,14 @@
             android:text="내 동선"/>
 
         <Switch
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:id="@+id/my_line_location_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:track="@drawable/switch_track_selector"
             android:thumb="@drawable/switch_thumb" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/confirm_button"
