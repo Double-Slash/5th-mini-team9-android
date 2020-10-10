@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.coronacircle.R;
 
@@ -22,22 +25,27 @@ import java.util.Calendar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-    /*
-     *    일별 동선보기 Dialog 커스텀
-     * */
+/*
+ *    일별 동선보기 Dialog 커스텀
+ * */
 public class YearMonthDayPickerDialog extends DialogFragment {
 
     private static final int MAX_YEAR = 2021;
-    private static final int MIN_YEAR = 2020;
+    private static final int MIN_YEAR = 2019;
 
-    private DatePickerDialog.OnDateSetListener listener;
+    public DatePickerDialog.OnDateSetListener listener;
     public Calendar cal = Calendar.getInstance();
+    public boolean isCheckMyLocation;
 
     public void setListener(DatePickerDialog.OnDateSetListener listener) {
         this.listener = listener;
     }
+    private int new_year = cal.get(Calendar.YEAR);
+    private int new_month = cal.get(Calendar.MONTH) + 1;
+    private int new_day = cal.get(Calendar.DAY_OF_MONTH);
 
     Button btnConfirm;
+    Switch switchMyLineLoction;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -54,23 +62,35 @@ public class YearMonthDayPickerDialog extends DialogFragment {
         btnConfirm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                listener.onDateSet(null, yearPicker.getValue(), monthPicker.getValue(), 0);
+                listener.onDateSet(null, yearPicker.getValue(), monthPicker.getValue(), dayPicker.getValue());
+                new_year = yearPicker.getValue();
+                new_month = monthPicker.getValue();
+                new_day = dayPicker.getValue();
                 YearMonthDayPickerDialog.this.getDialog().cancel();
+            }
+        });
+        switchMyLineLoction = dialog.findViewById(R.id.my_line_location_switch);
+        switchMyLineLoction.setChecked(isCheckMyLocation);
+        switchMyLineLoction.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                isCheckMyLocation = b;
+                System.out.println("반응했슈"+isCheckMyLocation);
             }
         });
 
         monthPicker.setMinValue(1);
         monthPicker.setMaxValue(12);
-        monthPicker.setValue(cal.get(Calendar.MONTH) + 1);
+        monthPicker.setValue(new_month);
 
         int year = cal.get(Calendar.YEAR);
         yearPicker.setMinValue(MIN_YEAR);
         yearPicker.setMaxValue(MAX_YEAR);
-        yearPicker.setValue(year);
+        yearPicker.setValue(new_year);
 
         dayPicker.setMinValue(1);
         dayPicker.setMaxValue(31);
-        dayPicker.setValue(cal.get(Calendar.DAY_OF_MONTH));
+        dayPicker.setValue(new_day);
 
         builder.setView(dialog);
 
@@ -97,5 +117,16 @@ public class YearMonthDayPickerDialog extends DialogFragment {
 
         return b;
     }
+
+    public boolean isCheckMyLocation() {
+        return isCheckMyLocation;
+    }
+
+    public void setCheckMyLocation(boolean checkMyLocation) {
+        isCheckMyLocation = checkMyLocation;
+    }
+
+
 }
+
 

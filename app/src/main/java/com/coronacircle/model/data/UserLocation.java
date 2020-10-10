@@ -8,8 +8,8 @@ public class UserLocation {
 //    private String date_time;       //YYYY-MM-DD HH:MM:SS
     private String date;    //날짜 YYYY-MM-DD
     private String time;    //시간 HH:MM:SS
-    private BigDecimal latitude;    //위도
-    private BigDecimal longitude;   //경도
+    private Double latitude;    //위도
+    private Double longitude;   //경도
 
     public int getId() {
         return id;
@@ -23,24 +23,28 @@ public class UserLocation {
 
 //    public void setDate_time(String date_time) { this.date_time = date_time; }
 
-    public BigDecimal getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public BigDecimal getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
     public String getDate() {
         return date;
+    }
+
+    public void setDateByDateTime(String datetime) {
+        this.date = datetime.substring(0, 10);
     }
 
     public void setDate(String date) {
@@ -50,8 +54,12 @@ public class UserLocation {
     public String getTime() {
         return time;
     }
+    public void setTimeByDateTime(String datetime) {
+        this.time = datetime.substring(11,17)+"00";
+    }
 
     public void setTime(String time) {
         this.time = time;
     }
+
 }

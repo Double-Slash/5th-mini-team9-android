@@ -6,10 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.coronacircle.model.data.Location;
 import com.coronacircle.model.data.UserLocation;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +38,8 @@ public class UserLocationDbHelper extends SQLiteOpenHelper {
                 + COL_DATE + " date not null,"
                 + COL_TIME + " time not null,"
 //                + COL_DATETIME + " datetime not null,"
-                + COL_LATITUDE + " text not null,"
-                + COL_lONGITUDE + " text not null);"
+                + COL_LATITUDE + " double not null,"
+                + COL_lONGITUDE + " double not null);"
         );
     }
 
@@ -50,15 +48,16 @@ public class UserLocationDbHelper extends SQLiteOpenHelper {
 //        contentValues.put(COL_DATETIME, location.getDate_time());
         contentValues.put(COL_DATE, userLocation.getDate());
         contentValues.put(COL_TIME, userLocation.getTime());
-        contentValues.put(COL_LATITUDE, userLocation.getLatitude().toString());
-        contentValues.put(COL_lONGITUDE, userLocation.getLongitude().toString());
+        contentValues.put(COL_LATITUDE, userLocation.getLatitude());
+        contentValues.put(COL_lONGITUDE, userLocation.getLongitude());
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
-        if( result == -1)return false;
+        if( result == -1) return false;
         else return true;
     }
 
+    //모든데이터
     public List<UserLocation> selectUserAllLocation(){
         List<UserLocation> resultList = new ArrayList<UserLocation>();
         String sql = "select * from " + TABLE_NAME + ";";
@@ -67,36 +66,68 @@ public class UserLocationDbHelper extends SQLiteOpenHelper {
         if(results.moveToFirst()){
             do{
                 UserLocation userLocation = new UserLocation();
-//                userLocation.setDate_time(results.getString(1));
+                userLocation.setId(results.getInt(0));
                 userLocation.setDate(results.getString(1));
                 userLocation.setTime(results.getString(2));
-                userLocation.setLatitude(new BigDecimal(results.getString(3)));
-                userLocation.setLongitude(new BigDecimal(results.getString(4)));
+                userLocation.setLatitude(results.getDouble(3));
+                userLocation.setLongitude(results.getDouble(4));
                 resultList.add(userLocation);
             }while(results.moveToNext());
         }
+        results.close();
         return resultList;
     }
 
+    //사용자의 일일 동선 데이터
     public List<UserLocation> selectUserLocationByDate(String date){
         List<UserLocation> resultList = new ArrayList<UserLocation>();
-        String sql = "select * from " + TABLE_NAME + " where date = " + date + ";";
+        String sql = "select * from " + TABLE_NAME + " where " + COL_DATE + " = '" + date + "';";
+//        String sql = "select * from " + TABLE_NAME + " where " + COL_DATE + " ='2020/10/09' AND " + COL_TIME + " between '01:27:00' AND '01:35:00';";
         Cursor results = db.rawQuery(sql, null);
 
         if(results.moveToFirst()){
             do{
                 UserLocation userLocation = new UserLocation();
+                userLocation.setId(results.getInt(0));
                 userLocation.setDate(results.getString(1));
                 userLocation.setTime(results.getString(2));
-                userLocation.setLatitude(new BigDecimal(results.getString(3)));
-                userLocation.setLongitude(new BigDecimal(results.getString(4)));
+                userLocation.setLatitude(results.getDouble(3));
+                userLocation.setLongitude(results.getDouble(4));
                 resultList.add(userLocation);
             }while(results.moveToNext());
         }
+        results.close();
         return resultList;
     }
 
-    //사용자 동선 2주뒤에 지울필요 있을까?
+    //확진자와 겹치는 데이터
+    public List<UserLocation> selectUserLocationByDateBetweenTime(String date, String arrivedTime, String exitTime){
+        List<UserLocation> resultList = new ArrayList<UserLocation>();
+
+//        if(exitTime.equals("null")){
+//            int exitTimePlus = Integer.parseInt(arrivedTime.substring(3,5))+5;
+//            exitTime = arrivedTime.substring(0,3) + exitTimePlus + ":00";
+//        }
+
+        String sql = "select * from " + TABLE_NAME + " where " + COL_DATE + " = '" + date + "' AND " + COL_TIME + " between '"+ arrivedTime +"' AND '" + exitTime + "';";
+        Cursor results = db.rawQuery(sql, null);
+
+        if(results.moveToFirst()){
+            do{
+                UserLocation userLocation = new UserLocation();
+                userLocation.setId(results.getInt(0));
+                userLocation.setDate(results.getString(1));
+                userLocation.setTime(results.getString(2));
+                userLocation.setLatitude(results.getDouble(3));
+                userLocation.setLongitude(results.getDouble(4));
+                resultList.add(userLocation);
+            }while(results.moveToNext());
+        }
+        results.close();
+        return resultList;
+    }
+
+    //사용자 동선 2주뒤에 지울필요 있을까? ->지운다
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {

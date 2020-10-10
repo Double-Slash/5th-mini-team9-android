@@ -4,25 +4,75 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="10dp"
     android:background="@drawable/shape_shadow"
     >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="20dp"
-        android:textSize="20sp"
-        android:text="장소이름"/>
-
-    <TextView
-        android:id="@+id/time"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:paddingBottom="40dp"
-        android:text="확진자 방문 시간 : 15:33 ~ 16 : 12"/>
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/loc_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:text="상호명"/>
+
+        <TextView
+            android:id="@+id/location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/loc_name"
+            android:gravity="center"
+            android:text="태릉우성아파트"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/loc_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:text="주소"/>
+
+        <TextView
+            android:id="@+id/location_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/loc_address"
+            android:gravity="center"
+            android:text="서울시 노원구 동일로 15길 10"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:textStyle="bold"
+        android:text="방문 일자"/>
+
+
+    <TextView
+        android:id="@+id/location_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="2020년9월21일 17:30-18:30"/>
 
 
 </LinearLayout>
