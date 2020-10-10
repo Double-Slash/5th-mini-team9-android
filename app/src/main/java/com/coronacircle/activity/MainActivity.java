@@ -46,14 +46,6 @@ public class MainActivity extends AppCompatActivity {
         tabContent = findViewById(R.id.tab);
         tabContent.setupWithViewPager(viewpagerContent);
 
-        //최초실행여부 판단
-        SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
-        int isFirst = pref.getInt("First",0);
-        if(isFirst != 1){
-            Intent intent = new Intent(MainActivity.this, PermissionCheckActivity.class);
-            startActivity(intent);
-        }
-
         loadTabName();
         setTabLayout();
         setViewPager();
