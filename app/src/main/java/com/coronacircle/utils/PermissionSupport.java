@@ -22,7 +22,7 @@ public class PermissionSupport {
 
     private String[] permissions = {
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE
+            // Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE // 알림권한
     };
 
     private List permissionList;
@@ -51,6 +51,7 @@ public class PermissionSupport {
         return true;
     }
 
+    //권한 허용 요청
     public void requestPermission(){
         ActivityCompat.requestPermissions(activity, (String[]) permissionList.toArray(new String[permissionList.size()]), MULTIPLE_PERMISSIONS);
     }

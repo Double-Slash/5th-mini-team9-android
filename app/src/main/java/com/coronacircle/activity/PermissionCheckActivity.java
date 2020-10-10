@@ -1,6 +1,6 @@
 package com.coronacircle.activity;
 
-        import android.Manifest;
+import android.Manifest;
         import android.content.DialogInterface;
         import android.content.Intent;
         import android.content.pm.PackageManager;

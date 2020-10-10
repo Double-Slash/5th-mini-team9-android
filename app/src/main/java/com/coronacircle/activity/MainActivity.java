@@ -7,6 +7,9 @@ import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -42,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
         viewpagerContent = findViewById(R.id.viewPager);
         tabContent = findViewById(R.id.tab);
         tabContent.setupWithViewPager(viewpagerContent);
+
+        //최초실행여부 판단
+        SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
+        int isFirst = pref.getInt("First",0);
+        if(isFirst != 1){
+            Intent intent = new Intent(MainActivity.this, PermissionCheckActivity.class);
+            startActivity(intent);
+        }
 
         loadTabName();
         setTabLayout();
