@@ -75,7 +75,6 @@ public class YearMonthDayPickerDialog extends DialogFragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 isCheckMyLocation = b;
-                System.out.println("반응했슈"+isCheckMyLocation);
             }
         });
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_main"
     tools:context=".fragment.SettingFragment"
     >
 
@@ -121,6 +122,22 @@
         </LinearLayout>
 
         </LinearLayout>
+
+
+        <Button
+            android:id="@+id/request_updates_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="@string/request_updates" />
+
+        <Button
+            android:id="@+id/remove_updates_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_below="@id/request_updates_button"
+            android:text="@string/remove_updates" />
 
     </LinearLayout>
 

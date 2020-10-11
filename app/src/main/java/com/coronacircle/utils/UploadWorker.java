@@ -2,30 +2,23 @@ package com.coronacircle.utils;
 
 import android.content.Context;
 
-import com.coronacircle.activity.MainActivity;
-import com.coronacircle.dbhelper.UserLocationDbHelper;
-import com.coronacircle.fragment.HomeFragment;
-import com.coronacircle.model.data.UserLocation;
-
-import java.util.concurrent.TimeUnit;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 public class UploadWorker extends Worker {
 
-    Context context2;
+
+    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
+    private static final int PERMISSIONS_REQUEST_CODE = 100;
 
     public UploadWorker(
             @NonNull Context context,
             @NonNull WorkerParameters params) {
         super(context, params);
-        context2 = context;
     }
 
     @Override
@@ -37,13 +30,33 @@ public class UploadWorker extends Worker {
 //
 //        PeriodicWorkRequest saveRequest =
 //                new PeriodicWorkRequest.Builder(UploadWorker.class, 15, TimeUnit.HOURS).build();
+//
 
-        GpsTracker gpsTracker = new GpsTracker(context2);
+//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+//        if (!checkLocationServicesStatus()) showDialogForLocationServiceSetting();
+//        else checkRunTimePermission();
+
+        GpsTracker gpsTracker = new GpsTracker(getApplicationContext());
         double latitude = gpsTracker.getLatitude(); // 위도
         double longitude = gpsTracker.getLongitude(); //경도
 
-        System.out.println( "context2 위도와 경도" + latitude + ", " + longitude);
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formatDate = sdfNow.format(date);
+
+
+//        UserLocation userLocation = new UserLocation();
+//        userLocation.setDateByDateTime(formatDate);
+//        userLocation.setTimeByDateTime(formatDate);
+//        userLocation.setLongitude(latitude+0.0008);
+//        userLocation.setLatitude(longitude);
+
+//        db.insertUserLocation(userLocation);
+
+        System.out.println( "doWork 백그라운드에서의 위도와 경도" + latitude + ", " + longitude);
         // Indicate whether the work finished successfully with the Result
+        System.out.println("백그라운드 도는중");
         return Result.success();
     }
 }

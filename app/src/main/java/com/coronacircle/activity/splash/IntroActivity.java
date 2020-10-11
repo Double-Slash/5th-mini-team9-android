@@ -43,6 +43,11 @@ public class IntroActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
 
+    @Override
+    public void onBackPressed(){
+        //뒤로가기 막기
+//        super.onBackPressed();
     }
 }

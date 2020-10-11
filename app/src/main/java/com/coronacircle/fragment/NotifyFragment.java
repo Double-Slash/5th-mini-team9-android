@@ -41,6 +41,25 @@ public class NotifyFragment extends Fragment {
         ListView notificationListView = view.findViewById(R.id.notification_list);
 
         notificationDbHelper = new NotificationDbHelper(getContext());
+        //알림 샘플
+//        notificationDbHelper.insertNotification(new Notification("2020-09-20","01:43:00","date"));
+//        notificationDbHelper.insertNotification(new Notification("2020-09-20","03:43:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-09-20","04:33:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-09-20","17:03:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-09-20","13:42:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-09-20","18:42:00","확진자 방문 장소가 업데이트 되었습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-09-20","13:04:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-09-20","13:43:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-02","01:43:00","date"));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-02","03:22:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-02","23:51:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-02","18:42:00","확진자 방문 장소가 업데이트 되었습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-02","23:12:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-11","01:43:00","date"));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-11","04:49:00","확진자 방문 장소가 업데이트 되었습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-11","11:23:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-11","22:11:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
+//        notificationDbHelper.insertNotification(new Notification("2020-10-11","05:10:00","확진자 방문 장소 반경 5km 접근 기록이 있습니다."));
 
         ArrayList<Notification> notificationList = notificationDbHelper.selectUserAllLocation();
 

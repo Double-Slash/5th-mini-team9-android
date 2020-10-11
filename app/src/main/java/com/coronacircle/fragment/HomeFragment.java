@@ -58,14 +58,20 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
             Manifest.permission.ACCESS_BACKGROUND_LOCATION
     };
 
-    //확진자 데이터 예시
+    //확진자 데이터 샘플
     List<CoronaLocation> sampleCoronaLocationList = Arrays.asList(
             new CoronaLocation("사무실", "2020-10-06", "17:05:00", "02:10:00", "서울특별시", "노원구", "서초대로길54길 29-18", "37.7590039", "127.037487"),
             new CoronaLocation("사무실", "2020-10-10", "17:05:00", "null", "서울특별시", "노원구", "서초대로길54길 29-18", "37.7590039", "127.037487"),
-            new CoronaLocation("서초구청", "2020-10-07", "01:05:00", "02:10:00", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
+            new CoronaLocation("서초구청", "2020-10-06", "01:05:00", "02:10:00", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
             new CoronaLocation("서초구청", "2020-10-08", "02:05:00", "02:10:00", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
             new CoronaLocation("서초구청", "2020-10-09", "02:06:00", "03:10:00", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
-            new CoronaLocation("녹양현대아파트", "2020-10-06", "18:05:00", "18:05:00", "서울특별시", "노원구", "서초대로길 -18", "37.7597039", "127.035487"));
+            new CoronaLocation("서초구청", "2020-10-09", "14:16:00", "null", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
+            new CoronaLocation("서초구청", "2020-10-09", "23:16:00", "null", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
+            new CoronaLocation("서초구청", "2020-10-10", "21:31:00", "null", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
+            new CoronaLocation("강남구청", "2020-10-10", "11:31:00", "21:01:00", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
+            new CoronaLocation("녹양현대아파트", "2020-10-02", "18:05:00", "18:05:00", "서울특별시", "노원구", "서초대로길 -18", "37.7597039", "127.035487"),
+            new CoronaLocation("녹양현대아파트", "2020-10-05", "11:35:00", "null", "서울특별시", "노원구", "서초대로길 -18", "37.7597039", "127.035487"),
+            new CoronaLocation("녹양현대아파트", "2020-10-06", "19:02:00", "22:05:00", "서울특별시", "노원구", "서초대로길 -18", "37.7597039", "127.035487"));
 
 
     private UserLocationDbHelper userLocationDbHelper;
@@ -107,6 +113,7 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
         mapView.setPOIItemEventListener(this);
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
 
+
         //말풍선 커스텀 어댑터
         CustomCalloutBalloonAdapter customCalloutBalloonAdapter = new CustomCalloutBalloonAdapter(getActivity());
         mapView.setCalloutBalloonAdapter(customCalloutBalloonAdapter);
@@ -130,7 +137,7 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
         });
 
 
-        //최초실행시 모든 코로나 확진자 정보 가져오기 (오브젝트 완전 깊은 복사)
+        //첫 화면에선 전체 확진자 마커 보이기
         allCoronaLocation();
 
 
@@ -390,7 +397,10 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
         polyline.setTag(1000);
         polyline.setLineColor(Color.argb(128, 255, 51, 0)); // Polyline 컬러 지정.
 
-        for (UserLocation u : dateUserLocationLine) polyline.addPoint(MapPoint.mapPointWithGeoCoord(u.getLatitude(), u.getLongitude()));
+        for (UserLocation u : dateUserLocationLine) {
+            System.out.println("유저동선 : " +u.getDate() + " " + u.getTime() + " " + u.getLatitude() + ", " + u.getLongitude());
+            polyline.addPoint(MapPoint.mapPointWithGeoCoord(u.getLatitude(), u.getLongitude()));
+        }
 
         // Polyline 지도에 올리기.
         mapView.addPolyline(polyline);
