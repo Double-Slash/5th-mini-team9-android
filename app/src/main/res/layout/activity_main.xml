@@ -20,13 +20,13 @@
         >
     </com.google.android.material.tabs.TabLayout>
 
-    <com.coronacircle.utils.SwipeViewPager
+    <com.coronacircle.custom.SwipeViewPager
         android:id="@+id/viewPager"
         android:layout_above="@id/tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
         >
-    </com.coronacircle.utils.SwipeViewPager>
+    </com.coronacircle.custom.SwipeViewPager>
 
 </RelativeLayout>

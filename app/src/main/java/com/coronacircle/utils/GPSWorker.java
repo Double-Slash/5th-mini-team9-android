@@ -2,6 +2,8 @@ package com.coronacircle.utils;
 
 import android.content.Context;
 
+import com.coronacircle.Service.GpsTracker;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,13 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-public class UploadWorker extends Worker {
+public class GPSWorker extends Worker {
 
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
 
-    public UploadWorker(
+    public GPSWorker(
             @NonNull Context context,
             @NonNull WorkerParameters params) {
         super(context, params);

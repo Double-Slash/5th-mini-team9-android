@@ -1,41 +1,21 @@
 package com.coronacircle.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
-import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.coronacircle.BuildConfig;
 import com.coronacircle.adapter.FragmentAdapter;
-import com.coronacircle.utils.SwipeViewPager;
+import com.coronacircle.custom.SwipeViewPager;
 import com.coronacircle.R;
-import com.coronacircle.utils.UploadWorker;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.material.snackbar.Snackbar;
+import com.coronacircle.utils.GPSWorker;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -178,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doworkWithPeriodic(){
-        PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 10, TimeUnit.SECONDS).build();
+        PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(GPSWorker.class, 10, TimeUnit.SECONDS).build();
         WorkManager.getInstance(getApplicationContext()).enqueue(saveRequest);
     }
 //    @Override

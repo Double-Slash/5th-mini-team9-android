@@ -1,4 +1,4 @@
-package com.coronacircle.fragment;
+package com.coronacircle.utils;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -22,23 +22,23 @@ import java.util.List;
 
 import androidx.core.app.NotificationCompat;
 
-public class Utils {
+public class BackgroundUtils {
 
-    final static String KEY_LOCATION_UPDATES_REQUESTED = "location-updates-requested";
-    final static String KEY_LOCATION_UPDATES_RESULT = "location-update-result";
+    public final static String KEY_LOCATION_UPDATES_REQUESTED = "location-updates-requested";
+    public final static String KEY_LOCATION_UPDATES_RESULT = "location-update-result";
     final static String CHANNEL_ID = "channel_01";
 
     String la;
     String lo;
 
-    static void setRequestingLocationUpdates(Context context, boolean value) {
+    public static void setRequestingLocationUpdates(Context context, boolean value) {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(KEY_LOCATION_UPDATES_REQUESTED, value)
                 .apply();
     }
 
-    static boolean getRequestingLocationUpdates(Context context) {
+    public static boolean getRequestingLocationUpdates(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(KEY_LOCATION_UPDATES_REQUESTED, false);
     }
@@ -47,7 +47,7 @@ public class Utils {
      * Posts a notification in the notification bar when a transition is detected.
      * If the user clicks the notification, control goes to the MainActivity.
      */
-    static void sendNotification(Context context, String notificationDetails) {
+    public static void sendNotification(Context context, String notificationDetails) {
         // Create an explicit content Intent that starts the main Activity.
         Intent notificationIntent = new Intent(context, MainActivity.class);
 
@@ -112,7 +112,7 @@ public class Utils {
      *
      * @param context The {@link Context}.
      */
-    static String getLocationResultTitle(Context context, List<Location> locations) {
+    public static String getLocationResultTitle(Context context, List<Location> locations) {
         String numLocationsReported = context.getResources().getQuantityString(
                 R.plurals.num_locations_reported, locations.size(), locations.size());
         return numLocationsReported + ": " + DateFormat.getDateTimeInstance().format(new Date());
@@ -138,7 +138,7 @@ public class Utils {
         return sb.toString();
     }
 
-    static void setLocationUpdatesResult(Context context, List<Location> locations) {
+    public static void setLocationUpdatesResult(Context context, List<Location> locations) {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putString(KEY_LOCATION_UPDATES_RESULT, getLocationResultTitle(context, locations)

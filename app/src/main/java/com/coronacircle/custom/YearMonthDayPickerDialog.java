@@ -1,11 +1,10 @@
-package com.coronacircle.adapter;
+package com.coronacircle.custom;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +12,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.coronacircle.R;
 

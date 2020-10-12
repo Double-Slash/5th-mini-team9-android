@@ -4,8 +4,6 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,11 +13,6 @@ import android.widget.Toast;
 
 import com.coronacircle.R;
 import com.coronacircle.dbhelper.UserLocationDbHelper;
-import com.coronacircle.utils.GpsTracker;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.coronacircle.utils;
+package com.coronacircle.Service;
 
 import android.Manifest;
 import android.app.Service;

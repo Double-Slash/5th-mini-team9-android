@@ -23,11 +23,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.coronacircle.BuildConfig;
 import com.coronacircle.R;
+import com.coronacircle.Service.LocationUpdatesBroadcastReceiver;
 import com.coronacircle.activity.MainActivity;
+import com.coronacircle.utils.BackgroundUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -46,13 +47,13 @@ public class SettingFragment extends Fragment implements
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
-    private static final long UPDATE_INTERVAL = 300000; // Every 300 seconds. = 5m
+    private static final long UPDATE_INTERVAL = 10000; // Every 300 seconds. = 5m
 
     /**
      * The fastest rate for active location updates. Updates will never be more frequent
      * than this value, but they may be less frequent.
      */
-    private static final long FASTEST_UPDATE_INTERVAL = 60000; // Every 60 seconds = 1m
+    private static final long FASTEST_UPDATE_INTERVAL = 5000; // Every 60 seconds = 1m
 
     /**
      * The max time before batched results are delivered by location services. Results may be
@@ -75,9 +76,9 @@ public class SettingFragment extends Fragment implements
 
 
     Switch switchSettingNotification;
-    boolean isCheckSettingNotification;
+    public boolean isCheckSettingNotification;
 
-    public SharedPreferences prefsetLocation;
+    private SharedPreferences prefsetLocation;
     public SharedPreferences prefsetNotification;
 
 
@@ -127,7 +128,7 @@ public class SettingFragment extends Fragment implements
         createLocationRequest();
 
         prefsetLocation = getContext().getSharedPreferences("setLocation", getContext().MODE_PRIVATE);
-        prefsetNotification= getContext().getSharedPreferences("setLotification", getContext().MODE_PRIVATE);
+        prefsetNotification= getContext().getSharedPreferences("setNotification", getContext().MODE_PRIVATE);
 
         switchSettingLocation = view.findViewById(R.id.setting_location_switch);
         switchSettingLocation.setChecked(prefsetLocation.getBoolean("setLocation",isCheckSettingLocation));
@@ -150,11 +151,11 @@ public class SettingFragment extends Fragment implements
         });
 
         switchSettingNotification = view.findViewById(R.id.setting_notification_switch);
-        switchSettingNotification.setChecked(prefsetLocation.getBoolean("setLotification",isCheckSettingNotification));
+        switchSettingNotification.setChecked(prefsetNotification.getBoolean("setNotification",isCheckSettingNotification));
         switchSettingNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                prefsetLocation.edit().putBoolean("setLotification", b).apply();
+                prefsetNotification.edit().putBoolean("setNotification", b).apply();
                 isCheckSettingNotification = b;
             }
         });
@@ -173,7 +174,7 @@ public class SettingFragment extends Fragment implements
     @Override
     public void onResume() {
         super.onResume();
-        updateButtonsState(Utils.getRequestingLocationUpdates(getContext()));
+        updateButtonsState(BackgroundUtils.getRequestingLocationUpdates(getContext()));
 //        mLocationUpdatesResultView.setText(Utils.getLocationUpdatesResult(this));
     }
 
@@ -331,11 +332,11 @@ public class SettingFragment extends Fragment implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        if (s.equals(Utils.KEY_LOCATION_UPDATES_RESULT)) {
+        if (s.equals(BackgroundUtils.KEY_LOCATION_UPDATES_RESULT)) {
 //            System.out.println(Utils.getLocationUpdatesResult(this)+"이거야?");
 //            mLocationUpdatesResultView.setText(Utils.getLocationUpdatesResult(this));
-        } else if (s.equals(Utils.KEY_LOCATION_UPDATES_REQUESTED)) {
-            updateButtonsState(Utils.getRequestingLocationUpdates(getContext()));
+        } else if (s.equals(BackgroundUtils.KEY_LOCATION_UPDATES_REQUESTED)) {
+            updateButtonsState(BackgroundUtils.getRequestingLocationUpdates(getContext()));
         }
     }
 
@@ -345,13 +346,13 @@ public class SettingFragment extends Fragment implements
     public void requestLocationUpdates(View view) {
         try {
 //            Log.i(TAG, "Starting location updates");
-            Utils.setRequestingLocationUpdates(getContext(), true);
+            BackgroundUtils.setRequestingLocationUpdates(getContext(), true);
             AlarmManager alarmManager=(AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),60000,
                     getPendingIntent());    //3초..
         } catch (SecurityException e) {
-            Utils.setRequestingLocationUpdates(getContext(), false);
+            BackgroundUtils.setRequestingLocationUpdates(getContext(), false);
             e.printStackTrace();
         }
     }
@@ -361,7 +362,7 @@ public class SettingFragment extends Fragment implements
      */
     public void removeLocationUpdates(View view) {
 //        Log.i(TAG, "Removing location updates");
-        Utils.setRequestingLocationUpdates(getContext(), false);
+        BackgroundUtils.setRequestingLocationUpdates(getContext(), false);
         mFusedLocationClient.removeLocationUpdates(getPendingIntent());
     }
 

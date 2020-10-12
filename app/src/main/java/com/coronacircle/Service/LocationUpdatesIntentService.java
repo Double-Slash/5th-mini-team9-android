@@ -1,4 +1,4 @@
-package com.coronacircle.fragment;
+package com.coronacircle.Service;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.location.Location;
 import java.util.List;
 
 import com.coronacircle.dbhelper.UserLocationDbHelper;
+import com.coronacircle.utils.BackgroundUtils;
 import com.google.android.gms.location.LocationResult;
 
 public class LocationUpdatesIntentService extends IntentService {
@@ -41,8 +42,8 @@ public class LocationUpdatesIntentService extends IntentService {
 //                    userLocation.setLongitude(locations.get(0).getLongitude());
 //                    System.out.println("유저동선 : " +userLocation.getDate() + " " + userLocation.getTime() + " " + userLocation.getLatitude() + " " + userLocation.getLongitude());
 //                    db.insertUserLocation(userLocation);
-                    Utils.setLocationUpdatesResult(this, locations);
-                    Utils.sendNotification(this, Utils.getLocationResultTitle(this, locations));
+                    BackgroundUtils.setLocationUpdatesResult(this, locations);
+                    BackgroundUtils.sendNotification(this, BackgroundUtils.getLocationResultTitle(this, locations));
 //                    Log.i(TAG, Utils.getLocationUpdatesResult(this));
 
                 }

@@ -16,6 +16,8 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+// 알림 내부디비
+
 public class NotificationDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "notification.db";
@@ -36,10 +38,10 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE "+ TABLE_NAME + "("
-                        + "_id integer primary key autoincrement, "
-                        + COL_DATE + " date not null,"
-                        + COL_TIME + " time not null,"
-                        + COL_MESSAGE + " text not null);"
+                + "_id integer primary key autoincrement, "
+                + COL_DATE + " date not null,"
+                + COL_TIME + " time not null,"
+                + COL_MESSAGE + " text not null);"
         );
     }
 

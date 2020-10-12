@@ -25,11 +25,11 @@ import android.widget.Toast;
 
 import com.coronacircle.adapter.CustomCalloutBalloonAdapter;
 import com.coronacircle.R;
-import com.coronacircle.adapter.YearMonthDayPickerDialog;
+import com.coronacircle.custom.YearMonthDayPickerDialog;
 import com.coronacircle.dbhelper.UserLocationDbHelper;
 import com.coronacircle.model.data.CoronaLocation;
 import com.coronacircle.model.data.UserLocation;
-import com.coronacircle.utils.GpsTracker;
+import com.coronacircle.Service.GpsTracker;
 
 import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
@@ -69,6 +69,11 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
             new CoronaLocation("서초구청", "2020-10-09", "23:16:00", "null", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
             new CoronaLocation("서초구청", "2020-10-10", "21:31:00", "null", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
             new CoronaLocation("강남구청", "2020-10-10", "11:31:00", "21:01:00", "서울특별시", "서초구", "서초대로길11번지", "37.7593039", "127.036987"),
+
+            new CoronaLocation("챔프당구클럽\n", "2020-10-03", "15:02:00", "15:32:00", "서울특별시", "서초구", "남부순환로347길 23", "37.4854200334459", "127.004320329245"),
+            new CoronaLocation("스시앤벤토 바이하즈벤\n", "2020-10-04", "16:15:00", "16:41:00", "서울특별시", "서초구", "신반포로176", "37.5053057320819", "127.00432"),
+            new CoronaLocation("야미또치킨 고속터미널점\n", "2020-10-06", "11:31:00", "20:26:00", "서울특별시", "서초구", "신반포로177", "37.5062373926847", "127.003696076291"),
+            new CoronaLocation("버거킹 양재점\n", "2020-10-06", "13:13:00", "13:35:00", "서울특별시", "서초구", "강남대로221", "37.4833000029317", "127.034439429663"),
             new CoronaLocation("녹양현대아파트", "2020-10-02", "18:05:00", "18:05:00", "서울특별시", "노원구", "서초대로길 -18", "37.7597039", "127.035487"),
             new CoronaLocation("녹양현대아파트", "2020-10-05", "11:35:00", "null", "서울특별시", "노원구", "서초대로길 -18", "37.7597039", "127.035487"),
             new CoronaLocation("녹양현대아파트", "2020-10-06", "19:02:00", "22:05:00", "서울특별시", "노원구", "서초대로길 -18", "37.7597039", "127.035487"));
