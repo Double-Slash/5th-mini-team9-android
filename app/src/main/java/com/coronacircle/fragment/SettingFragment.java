@@ -47,13 +47,13 @@ public class SettingFragment extends Fragment implements
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
-    private static final long UPDATE_INTERVAL = 10000; // Every 300 seconds. = 5m
+    private static final long UPDATE_INTERVAL = 30000; // Every 300 seconds. = 5m
 
     /**
      * The fastest rate for active location updates. Updates will never be more frequent
      * than this value, but they may be less frequent.
      */
-    private static final long FASTEST_UPDATE_INTERVAL = 5000; // Every 60 seconds = 1m
+    private static final long FASTEST_UPDATE_INTERVAL = 20000; // Every 60 seconds = 1m
 
     /**
      * The max time before batched results are delivered by location services. Results may be

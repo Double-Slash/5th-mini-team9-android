@@ -4,12 +4,21 @@ public class Notification {
 
 
     private int id;
+    private String whereName;
     private String date;    //날짜 YYYY-MM-DD
     private String time;    //시간 HH:MM:SS
     private String message;
+
     public Notification(){}
 
     public Notification(String date, String time, String message) {
+        this.date = date;
+        this.time = time;
+        this.message = message;
+    }
+
+    public Notification(String whereName, String date, String time, String message) {
+        this.whereName = whereName;
         this.date = date;
         this.time = time;
         this.message = message;
@@ -45,5 +54,13 @@ public class Notification {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getWhereName() {
+        return whereName;
+    }
+
+    public void setWhereName(String whereName) {
+        this.whereName = whereName;
     }
 }

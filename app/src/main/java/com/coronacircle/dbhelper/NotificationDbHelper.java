@@ -27,6 +27,7 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
     public static final String COL_DATE = "date";
     public static final String COL_TIME = "time";
     public static final String COL_MESSAGE = "message";
+    public static final String COL_WHERENAME = "wherename";
 
     SQLiteDatabase db;
 
@@ -41,6 +42,7 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
                 + "_id integer primary key autoincrement, "
                 + COL_DATE + " date not null,"
                 + COL_TIME + " time not null,"
+                + COL_WHERENAME + " text,"
                 + COL_MESSAGE + " text not null);"
         );
     }
@@ -54,6 +56,7 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_DATE, notification.getDate());
         contentValues.put(COL_TIME, notification.getTime());
+        contentValues.put(COL_WHERENAME, notification.getWhereName());
         contentValues.put(COL_MESSAGE, notification.getMessage());
 
         long result = db.insert(TABLE_NAME, null, contentValues);
@@ -74,7 +77,8 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
                 notification.setId(results.getInt(0));
                 notification.setDate(results.getString(1));
                 notification.setTime(results.getString(2));
-                notification.setMessage(results.getString(3));
+                notification.setWhereName(results.getString(3));
+                notification.setMessage(results.getString(4));
                 resultList.add(notification);
             }while(results.moveToNext());
         }
@@ -83,6 +87,30 @@ public class NotificationDbHelper extends SQLiteOpenHelper {
         for( Notification n : resultList){
             System.out.println(n.getDate() + " " + n.getTime() + " : " + n.getMessage());
         }
+        return resultList;
+    }
+
+    public ArrayList<Notification> selectCheckSameUserLocation(String wherename , String date){
+        ArrayList<Notification> resultList = new ArrayList<>();
+        String sql = "select * from " + TABLE_NAME + " where " + COL_WHERENAME + " = '"+ wherename + "' and " + COL_DATE + " = '"+ date + "';";
+        Cursor results = db.rawQuery(sql, null);
+
+        if(results.moveToFirst()){
+            do{
+                Notification notification = new Notification();
+                notification.setId(results.getInt(0));
+                notification.setDate(results.getString(1));
+                notification.setTime(results.getString(2));
+                notification.setWhereName(results.getString(3));
+                notification.setMessage(results.getString(4));
+                resultList.add(notification);
+            }while(results.moveToNext());
+        }
+        results.close();
+//
+//        for( Notification n : resultList){
+//            System.out.println(n.getDate() + " " + n.getTime() + " : " + n.getMessage());
+//        }
         return resultList;
     }
 

@@ -77,8 +77,8 @@ public class BackgroundUtils {
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
                         R.mipmap.ic_coronacircle_round))
                 .setColor(Color.RED)
-                .setContentTitle("현재 위치 등록")
-                .setContentText("사용자 동선이 업데이트 되었습니다")
+                .setContentTitle("코로나 써클 알림")
+                .setContentText("확진자 방문 장소 반경 3km 접근 기록이 있습니다.")
                 .setContentIntent(notificationPendingIntent);
 
         // Dismiss notification once the user touches it.
